@@ -12,6 +12,7 @@ Group:          Publishing
 Url:            http://www.phoronix-test-suite.com/
 
 BuildArch:      noarch
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 Requires:	freeimage-devel
 Requires:	gcc-gfortran
