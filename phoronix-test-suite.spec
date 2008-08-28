@@ -1,20 +1,21 @@
-%define name    phoronix-test-suite
-%define version 1.0.5
-%define release %mkrel 1
+%define name	phoronix-test-suite
+%define version 1.2
+%define release %mkrel 0b3
 
-Summary:        A Comprehensive Linux Benchmarking System
-Name:           %{name}
-Version:        %{version}
-Release:        %{release}
-Source0:        %{name}-%{version}.tar.bz2
-License:        GPLv3
-Group:          Publishing
-Url:            http://www.phoronix-test-suite.com/
+Summary:	A Comprehensive Linux Benchmarking System
+Name:		%{name}
+Version:	%{version}
+Release:	%{release}
+Source0:	%{name}-%{version}.0b3.tar.bz2
+License:	GPLv3
+Group:		Publishing
+Url:		http://www.phoronix-test-suite.com/
 
-BuildArch:      noarch
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildArch:	noarch
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 Requires:	freeimage-devel
+Requires:	git
 Requires:	gcc-gfortran
 Requires:	glew-devel
 Requires:	gtk+2-devel
@@ -24,8 +25,8 @@ Requires:	imlib2-devel
 Requires:	libaio-devel
 Requires:	portaudio-devel
 Requires:	png-devel
-Requires:       php-cli
-Requires:       php-gd
+Requires:	php-cli
+Requires:	php-gd
 Requires:	scons
 Requires:	SDL-devel
 Requires:	SDL_gfx-devel
@@ -45,10 +46,11 @@ platform available for Linux and is designed to carry out qualitative and
 quantitative benchmarks in a clean, reproducible, and easy-to-use manner.
 
 %prep
-rm -rf $RPM_BUILD_ROOT
 %setup -q -n %name
 
 %install
+rm -rf $RPM_BUILD_ROOT
+mkdir -p $RPM_BUILD_ROOT/usr
 $RPM_BUILD_DIR/%{name}/install-sh $RPM_BUILD_ROOT/usr
 sed -i "s|$RPM_BUILD_ROOT||g" $RPM_BUILD_ROOT/%{_bindir}/phoronix-test-suite
 
@@ -61,4 +63,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/%{name}
 %{_datadir}/%{name}/*
 %doc %{_datadir}/doc/%{name}
-
