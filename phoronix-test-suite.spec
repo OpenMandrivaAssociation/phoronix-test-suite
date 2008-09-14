@@ -1,5 +1,5 @@
 %define name	phoronix-test-suite
-%define version 1.2.0
+%define version 1.2.2
 %define release %mkrel 1
 
 Summary:	A Comprehensive Linux Benchmarking System
@@ -15,6 +15,7 @@ BuildArch:	noarch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 Requires:	freeimage-devel
+Requires:	ftjam
 Requires:	git
 Requires:	gcc-gfortran
 Requires:	glew-devel
@@ -23,6 +24,8 @@ Requires:	java
 Requires:	jpeg-devel
 Requires:	imlib2-devel
 Requires:	libaio-devel
+Requires:	libvorbis-devel
+Requires:	openal-devel
 Requires:	portaudio-devel
 Requires:	png-devel
 Requires:	php-cli
