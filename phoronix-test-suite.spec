@@ -1,5 +1,5 @@
 %define name	phoronix-test-suite
-%define version 1.6.0
+%define version 1.8.0
 %define release %mkrel 1
 
 Summary:	A Comprehensive Linux Benchmarking System
@@ -26,10 +26,13 @@ Requires:	imlib2-devel
 Requires:	libaio-devel
 Requires:	libvorbis-devel
 Requires:	openal-devel
+Requires:	perl-devel
+#Requires:	perl-opengl # will be needed in a further revision but we are too close of the release
 Requires:	portaudio-devel
 Requires:	png-devel
 Requires:	php-cli
 Requires:	php-gd
+Requires:	php-gtk2
 Requires:	scons
 Requires:	SDL-devel
 Requires:	SDL_gfx-devel
@@ -57,6 +60,19 @@ mkdir -p $RPM_BUILD_ROOT/usr
 $RPM_BUILD_DIR/%{name}/install-sh $RPM_BUILD_ROOT/usr
 sed -i "s|$RPM_BUILD_ROOT||g" $RPM_BUILD_ROOT/%{_bindir}/phoronix-test-suite
 
+mkdir -p %{buildroot}%{_datadir}/applications
+cat > %{buildroot}%{_datadir}/applications/%{name}.desktop <<EOF
+[Desktop Entry]
+Name="Phoronix test Suite"
+Comment=PTS allow to benchmark your computer
+Exec="%{_bindir}/%{name} gui"
+Icon=%{name}
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=GTK;X-MandrivaLinux-System-Monitoring;System;Monitor;
+EOF
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -65,4 +81,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/%{name}.1*
 %{_bindir}/%{name}
 %{_datadir}/%{name}/*
+%{_datadir}/applications/%{name}.desktop
+%{_iconsdir}/%{name}.png
 %doc %{_datadir}/doc/%{name}
