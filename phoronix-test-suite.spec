@@ -63,14 +63,15 @@ sed -i "s|$RPM_BUILD_ROOT||g" $RPM_BUILD_ROOT/%{_bindir}/phoronix-test-suite
 mkdir -p %{buildroot}%{_datadir}/applications
 cat > %{buildroot}%{_datadir}/applications/%{name}.desktop <<EOF
 [Desktop Entry]
-Name="Phoronix test Suite"
-Comment=PTS allow to benchmark your computer
-Exec="%{_bindir}/%{name} gui"
+Name=Phoronix Test Suite
+Comment=Phoronix Test Suite Benchmarking Utility
+Exec=%{_bindir}/%{name} gui
 Icon=%{name}
 Terminal=false
 Type=Application
+Encoding=UTF-8
 StartupNotify=true
-Categories=GTK;X-MandrivaLinux-System-Monitoring;System;Monitor;
+Categories=GTK;System;Monitor;X-MandrivaLinux-CrossDesktop;
 EOF
 
 %clean
