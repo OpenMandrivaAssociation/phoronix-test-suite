@@ -1,6 +1,6 @@
 %define name	phoronix-test-suite
 %define version 1.8.0
-%define release %mkrel 1
+%define release %mkrel 2
 
 Summary:	A Comprehensive Linux Benchmarking System
 Name:		%{name}
