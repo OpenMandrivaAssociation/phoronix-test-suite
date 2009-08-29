@@ -17,38 +17,37 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires:	php-cli
 Requires:	php-gtk2
 
-Suggest:	freeimage-devel
-Suggest:	ftjam
-Suggest:	git
-Suggest:	gcc-gfortran
-Suggest:	glew-devel
-Suggest:	gtk+2-devel
-Suggest:	java
-Suggest:	libopenjpeg-devel
-Suggest:	imlib2-devel
-Suggest:	libaio-devel
-Suggest:	libcurl-devel
-Suggest:	libfftw-devel
-Suggest:	libpopt-devel
-Suggest:	libvorbis-devel
-Suggest:	openal-devel
-Suggest:	perl-devel
-#Suggest:	perl-opengl # will be needed in a further revision but we are too close of the release
-Suggest:	portaudio-devel
-Suggest:	png-devel
-Requires:	php-cli
-Suggest:	php-gd
-Suggest:	scons
-Suggest:	SDL-devel
-Suggest:	SDL_gfx-devel
-Suggest:	SDL_net-devel
-Suggest:	SDL_image-devel
-Suggest:	SDL_sound-devel
-Suggest:	SDL_ttf-devel
-Suggest:	task-c-devel
-Suggest:	task-c++-devel
-Suggest:	tcsh
-Suggest:	X11-devel
+Suggests:	freeimage-devel
+Suggests:	ftjam
+Suggests:	git
+Suggests:	gcc-gfortran
+Suggests:	glew-devel
+Suggests:	gtk+2-devel
+Suggests:	java
+Suggests:	libopenjpeg-devel
+Suggests:	imlib2-devel
+Suggests:	libaio-devel
+Suggests:	libcurl-devel
+Suggests:	libfftw-devel
+Suggests:	libpopt-devel
+Suggests:	libvorbis-devel
+Suggests:	openal-devel
+Suggests:	perl-devel
+#Suggests:	perl-opengl # will be needed in a further revision but we are too close of the release
+Suggests:	portaudio-devel
+Suggests:	png-devel
+Suggests:	php-gd
+Suggests:	scons
+Suggests:	SDL-devel
+Suggests:	SDL_gfx-devel
+Suggests:	SDL_net-devel
+Suggests:	SDL_image-devel
+Suggests:	SDL_sound-devel
+Suggests:	SDL_ttf-devel
+Suggests:	task-c-devel
+Suggests:	task-c++-devel
+Suggests:	tcsh
+Suggests:	X11-devel
 
 %description
 The Phoronix Test Suite is the most comprehensive testing and benchmarking 
