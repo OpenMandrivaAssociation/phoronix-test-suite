@@ -1,5 +1,5 @@
 %define name	phoronix-test-suite
-%define version 1.8.1
+%define version 2.0.0
 %define release %mkrel 1
 
 Summary:	A Comprehensive Linux Benchmarking System
@@ -14,37 +14,41 @@ Url:		http://www.phoronix-test-suite.com/
 BuildArch:	noarch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
-Requires:	freeimage-devel
-Requires:	ftjam
-Requires:	git
-Requires:	gcc-gfortran
-Requires:	glew-devel
-Requires:	gtk+2-devel
-Requires:	java
-Requires:	jpeg-devel
-Requires:	imlib2-devel
-Requires:	libaio-devel
-Requires:	libvorbis-devel
-Requires:	openal-devel
-Requires:	perl-devel
-#Requires:	perl-opengl # will be needed in a further revision but we are too close of the release
-Requires:	portaudio-devel
-Requires:	png-devel
 Requires:	php-cli
-Requires:	php-gd
 Requires:	php-gtk2
-Requires:	scons
-Requires:	SDL-devel
-Requires:	SDL_gfx-devel
-Requires:	SDL_net-devel
-Requires:	SDL_image-devel
-Requires:	SDL_sound-devel
-Requires:	SDL_ttf-devel
-Requires:	task-c-devel
-Requires:	task-c++-devel
-Requires:	tcsh
-Requires:	X11-devel
 
+Suggest:	freeimage-devel
+Suggest:	ftjam
+Suggest:	git
+Suggest:	gcc-gfortran
+Suggest:	glew-devel
+Suggest:	gtk+2-devel
+Suggest:	java
+Suggest:	libopenjpeg-devel
+Suggest:	imlib2-devel
+Suggest:	libaio-devel
+Suggest:	libcurl-devel
+Suggest:	libfftw-devel
+Suggest:	libpopt-devel
+Suggest:	libvorbis-devel
+Suggest:	openal-devel
+Suggest:	perl-devel
+#Suggest:	perl-opengl # will be needed in a further revision but we are too close of the release
+Suggest:	portaudio-devel
+Suggest:	png-devel
+Requires:	php-cli
+Suggest:	php-gd
+Suggest:	scons
+Suggest:	SDL-devel
+Suggest:	SDL_gfx-devel
+Suggest:	SDL_net-devel
+Suggest:	SDL_image-devel
+Suggest:	SDL_sound-devel
+Suggest:	SDL_ttf-devel
+Suggest:	task-c-devel
+Suggest:	task-c++-devel
+Suggest:	tcsh
+Suggest:	X11-devel
 
 %description
 The Phoronix Test Suite is the most comprehensive testing and benchmarking 
@@ -79,6 +83,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,0755)
+%_sysconfdir/bash_completion.d/%name
 %{_mandir}/man1/%{name}.1*
 %{_bindir}/%{name}
 %{_datadir}/%{name}/*
