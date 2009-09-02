@@ -1,6 +1,6 @@
 %define name	phoronix-test-suite
 %define version 2.0.0
-%define release %mkrel 1
+%define release %mkrel 2
 
 Summary:	A Comprehensive Linux Benchmarking System
 Name:		%{name}
@@ -16,6 +16,7 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 Requires:	php-cli
 Requires:	php-gtk2
+Requires:	php-fpdf
 
 Suggests:	freeimage-devel
 Suggests:	ftjam
