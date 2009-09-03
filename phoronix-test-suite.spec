@@ -1,6 +1,8 @@
+%define _requires_exceptions pear(.*)
+
 %define name	phoronix-test-suite
 %define version 2.0.0
-%define release %mkrel 2
+%define release %mkrel 3
 
 Summary:	A Comprehensive Linux Benchmarking System
 Name:		%{name}
