@@ -2,13 +2,13 @@
 
 %define name	phoronix-test-suite
 %define version 2.6.0
-%define release %mkrel 0.a2.1
+%define release %mkrel 0.a3.1
 
 Summary:	A Comprehensive Linux Benchmarking System
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
-Source0:	%{name}-%{version}a2.tar.gz
+Source0:	%{name}-%{version}a3.tar.gz
 License:	GPLv3
 Group:		Publishing
 Url:		http://www.phoronix-test-suite.com/
