@@ -1,14 +1,14 @@
 %define _requires_exceptions pear(.*)
 
 %define name	phoronix-test-suite
-%define version 2.8.2
-%define release %mkrel 1
+%define version 3.0.0
+%define release %mkrel 0.rc1.1
 
 Summary:	A Comprehensive Linux Benchmarking System
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
-Source0:	%{name}-%{version}.tar.gz
+Source0:	%{name}-%{version}.rc1.tar.gz
 License:	GPLv3
 Group:		Publishing
 Url:		http://www.phoronix-test-suite.com/
@@ -90,5 +90,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/%{name}
 %{_datadir}/%{name}/*
 %{_datadir}/applications/%{name}.desktop
-%{_iconsdir}/%{name}.png
+%{_iconsdir}/hicolor/48x48/apps/%{name}.png
 %doc %{_datadir}/doc/%{name}
