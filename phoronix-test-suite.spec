@@ -2,7 +2,7 @@
 
 %define name	phoronix-test-suite
 %define version 3.0.0
-%define release %mkrel 0.rc1.1
+%define release %mkrel 1
 
 Summary:	A Comprehensive Linux Benchmarking System
 Name:		%{name}
