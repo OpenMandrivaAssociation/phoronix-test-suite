@@ -1,14 +1,14 @@
 %define _requires_exceptions pear(.*)
 
 %define name	phoronix-test-suite
-%define version 3.0.0
+%define version 3.0.1
 %define release %mkrel 1
 
 Summary:	A Comprehensive Linux Benchmarking System
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
-Source0:	%{name}-%{version}.rc1.tar.gz
+Source0:	%{name}-%{version}.tar.gz
 License:	GPLv3
 Group:		Publishing
 Url:		http://www.phoronix-test-suite.com/
