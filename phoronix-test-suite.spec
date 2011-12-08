@@ -63,7 +63,7 @@ quantitative benchmarks in a clean, reproducible, and easy-to-use manner.
 %install
 rm -rf $RPM_BUILD_ROOT
 mkdir -p $RPM_BUILD_ROOT/usr
-$RPM_BUILD_DIR/%{name}/install-sh $RPM_BUILD_ROOT/usr
+%{_builddir}/%{name}/install-sh $RPM_BUILD_ROOT/usr
 sed -i "s|$RPM_BUILD_ROOT||g" $RPM_BUILD_ROOT/%{_bindir}/phoronix-test-suite
 
 mkdir -p %{buildroot}%{_datadir}/applications
