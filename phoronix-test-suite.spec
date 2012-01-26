@@ -1,20 +1,19 @@
 %define _requires_exceptions pear(.*)
 
-%define name	phoronix-test-suite
-%define version 3.6.1
-%define release %mkrel 1
+# GUI was temporary dropped since 3.0 Aplha 1
+%define		gui_enabled 0
 
+Name:		phoronix-test-suite
+Version:	3.6.1
+Release:	%mkrel 1
 Summary:	A Comprehensive Linux Benchmarking System
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
 Source0:	%{name}-%{version}.tar.gz
+Patch0:		phoronix-test-suite-3.6.1-install.patch
 License:	GPLv3
 Group:		Publishing
 Url:		http://www.phoronix-test-suite.com/
 
 BuildArch:	noarch
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 Requires:	php-cli
 Requires:	php-gtk2
@@ -58,16 +57,19 @@ platform available for Linux and is designed to carry out qualitative and
 quantitative benchmarks in a clean, reproducible, and easy-to-use manner.
 
 %prep
-%setup -q -n %name
+%setup -q -n %{name}
+%patch0 -p1
 
 %install
-rm -rf $RPM_BUILD_ROOT
-mkdir -p $RPM_BUILD_ROOT/usr
-%{_builddir}/%{name}/install-sh $RPM_BUILD_ROOT/usr
-sed -i "s|$RPM_BUILD_ROOT||g" $RPM_BUILD_ROOT/%{_bindir}/phoronix-test-suite
+%__rm -rf %{buildroot}
+%__mkdir_p %{buildroot}%{_prefix}
+./install-sh %{buildroot}%{_prefix}
+%__sed -i "s|%{buildroot}||g" %{buildroot}%{_bindir}/%{name}
 
-mkdir -p %{buildroot}%{_datadir}/applications
-cat > %{buildroot}%{_datadir}/applications/%{name}.desktop <<EOF
+%if %{gui_enabled}
+# we overwrite default desktop file with the better one
+# should be checked if it's needed when GUI is back
+%__cat > %{buildroot}%{_datadir}/applications/%{name}.desktop <<EOF
 [Desktop Entry]
 Name=Phoronix Test Suite
 Comment=Phoronix Test Suite Benchmarking Utility
@@ -79,16 +81,18 @@ Encoding=UTF-8
 StartupNotify=true
 Categories=GTK;System;Monitor;X-MandrivaLinux-CrossDesktop;
 EOF
+%endif
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+%__rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,0755)
-%_sysconfdir/bash_completion.d/%name
+%doc %{_datadir}/doc/%{name}
+%{_sysconfdir}/bash_completion.d/%{name}
 %{_mandir}/man1/%{name}.1*
 %{_bindir}/%{name}
 %{_datadir}/%{name}/*
 %{_datadir}/applications/%{name}.desktop
 %{_iconsdir}/hicolor/48x48/apps/%{name}.png
-%doc %{_datadir}/doc/%{name}
+%{_iconsdir}/hicolor/64x64/apps/openbenchmarking.png
