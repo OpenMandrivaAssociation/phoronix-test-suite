@@ -4,8 +4,8 @@
 %define		gui_enabled 0
 
 Name:		phoronix-test-suite
-Version:	3.6.1
-Release:	%mkrel 2
+Version:	3.8.0
+Release:	1
 Summary:	A Comprehensive Linux Benchmarking System
 Source0:	%{name}-%{version}.tar.gz
 Patch0:		phoronix-test-suite-3.6.1-install.patch
@@ -60,8 +60,10 @@ quantitative benchmarks in a clean, reproducible, and easy-to-use manner.
 %setup -q -n %{name}
 %patch0 -p1
 
+%build
+echo "fake build"
+
 %install
-%__rm -rf %{buildroot}
 %__mkdir_p %{buildroot}%{_prefix}
 ./install-sh %{buildroot}%{_prefix}
 %__sed -i "s|%{buildroot}||g" %{buildroot}%{_bindir}/%{name}
@@ -83,9 +85,6 @@ Categories=GTK;System;Monitor;X-MandrivaLinux-CrossDesktop;
 EOF
 %endif
 
-%clean
-%__rm -rf %{buildroot}
-
 %files
 %defattr(-,root,root,0755)
 %doc %{_datadir}/doc/%{name}
@@ -94,5 +93,5 @@ EOF
 %{_bindir}/%{name}
 %{_datadir}/%{name}/*
 %{_datadir}/applications/%{name}.desktop
+%{_datadir}/applications/phoronix-test-suite-launcher.desktop
 %{_iconsdir}/hicolor/48x48/apps/%{name}.png
-%{_iconsdir}/hicolor/64x64/apps/openbenchmarking.png
