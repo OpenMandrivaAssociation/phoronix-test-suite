@@ -1,10 +1,10 @@
-%define _requires_exceptions pear(.*)
+#% define _requires_exceptions pear(.*)
 
 # GUI was temporary dropped since 3.0 Aplha 1
-%define		gui_enabled 0
+%define		gui_enabled 1
 
 Name:		phoronix-test-suite
-Version:	3.8.0
+Version:	4.0.1
 Release:	1
 Summary:	A Comprehensive Linux Benchmarking System
 Source0:	%{name}-%{version}.tar.gz
