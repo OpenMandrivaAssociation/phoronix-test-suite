@@ -1,0 +1,11 @@
+diff -urN phoronix-test-suite/install-sh phoronix-test-suite-patched/install-sh
+--- phoronix-test-suite/install-sh	2011-05-18 05:00:59.000000000 +1100
++++ phoronix-test-suite-patched/install-sh	2012-01-27 03:36:52.321366495 +1100
+@@ -50,6 +50,7 @@
+ mkdir -p $DESTDIR$INSTALL_PREFIX/bin/
+ mkdir -p $DESTDIR$INSTALL_PREFIX/share/applications/
+ mkdir -p $DESTDIR$INSTALL_PREFIX/share/icons/hicolor/48x48/apps/
++mkdir -p $DESTDIR$INSTALL_PREFIX/share/icons/hicolor/64x64/apps/
+ mkdir -p $DESTDIR$INSTALL_PREFIX/share/man/man1/
+ mkdir -p $DESTDIR$INSTALL_PREFIX/share/phoronix-test-suite/
+ mkdir -p $DESTDIR$INSTALL_PREFIX/share/doc/phoronix-test-suite/
