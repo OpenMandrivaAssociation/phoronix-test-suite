@@ -5,7 +5,7 @@
 
 Name:		phoronix-test-suite
 Version:	4.0.1
-Release:	1
+Release:	2
 Summary:	A Comprehensive Linux Benchmarking System
 Source0:	%{name}-%{version}.tar.gz
 Patch0:		phoronix-test-suite-3.6.1-install.patch
