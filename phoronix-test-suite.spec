@@ -99,3 +99,6 @@ EOF
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/applications/phoronix-test-suite-launcher.desktop
 %{_iconsdir}/hicolor/48x48/apps/%{name}.png
+%{_iconsdir}/hicolor/64x64/mimetypes/application-x-openbenchmarking.png
+%{_datadir}/mime/packages/openbenchmarking-mime.xml
+
