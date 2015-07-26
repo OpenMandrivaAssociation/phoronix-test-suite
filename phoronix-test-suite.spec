@@ -4,11 +4,11 @@
 %define		gui_enabled 1
 
 Name:		phoronix-test-suite
-Version:	4.0.1
-Release:	1.1
+Version:	5.8.1
+Release:	1
 Summary:	A Comprehensive Linux Benchmarking System
 Source0:	%{name}-%{version}.tar.gz
-Patch0:		phoronix-test-suite-3.6.1-install.patch
+Patch0:		phoronix-test-suite-5.8.1-install.patch
 License:	GPLv3
 Group:		Publishing
 Url:		http://www.phoronix-test-suite.com/
@@ -16,7 +16,8 @@ Url:		http://www.phoronix-test-suite.com/
 BuildArch:	noarch
 
 Requires:	php-cli
-Requires:	php-gtk2
+# broken when this is installed
+Conflicts:	php-gtk2
 Requires:	php-fpdf
 
 Suggests:	freeimage-devel
@@ -58,7 +59,7 @@ quantitative benchmarks in a clean, reproducible, and easy-to-use manner.
 
 %prep
 %setup -q -n %{name}
-%patch0 -p1
+%apply_patches
 
 %build
 echo "fake build"
@@ -89,9 +90,12 @@ EOF
 %defattr(-,root,root,0755)
 %doc %{_datadir}/doc/%{name}
 %{_sysconfdir}/bash_completion.d/%{name}
+%{_unitdir}/phoromatic-client.service
+%{_unitdir}/phoromatic-server.service
 %{_mandir}/man1/%{name}.1*
 %{_bindir}/%{name}
 %{_datadir}/%{name}/*
+%{_datadir}/appdata/*.xml
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/applications/phoronix-test-suite-launcher.desktop
 %{_iconsdir}/hicolor/48x48/apps/%{name}.png
