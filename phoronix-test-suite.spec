@@ -99,8 +99,8 @@ EOF
 %files
 %doc %{_datadir}/doc/%{name}
 %config(noreplace) %{_sysconfdir}/bash_completion.d/%{name}
-%{_unitdir}/phoromatic-client.service
-%{_unitdir}/phoromatic-server.service
+#{_unitdir}/phoromatic-client.service
+#{_unitdir}/phoromatic-server.service
 %{_bindir}/%{name}
 %{_datadir}/%{name}/
 %{_datadir}/applications/%{name}.desktop
