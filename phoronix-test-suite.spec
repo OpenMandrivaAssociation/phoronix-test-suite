@@ -101,6 +101,8 @@ EOF
 %config(noreplace) %{_sysconfdir}/bash_completion.d/%{name}
 #{_unitdir}/phoromatic-client.service
 #{_unitdir}/phoromatic-server.service
+/usr/lib/systemd/system/phoromatic-client.service
+/usr/lib/systemd/system/phoromatic-server.service
 %{_bindir}/%{name}
 %{_datadir}/%{name}/
 %{_datadir}/applications/%{name}.desktop
