@@ -1,104 +1,115 @@
-#% define _requires_exceptions pear(.*)
+%global __requires_exclude pear\\(.*\\)
 
-# GUI was temporary dropped since 3.0 Aplha 1
-%define		gui_enabled 1
-
-Name:		phoronix-test-suite
-Version:	5.8.1
-Release:	1
 Summary:	A Comprehensive Linux Benchmarking System
-Source0:	%{name}-%{version}.tar.gz
-Patch0:		phoronix-test-suite-5.8.1-install.patch
+Name:		phoronix-test-suite
+Version:	8.4.1
+Release:	1
 License:	GPLv3
 Group:		Publishing
 Url:		http://www.phoronix-test-suite.com/
-
+Source0:	http://www.phoronix-test-suite.com/releases/%{name}-%{version}.tar.gz
 BuildArch:	noarch
-
 Requires:	php-cli
-# broken when this is installed
-Conflicts:	php-gtk2
-Requires:	php-fpdf
+Requires:	php-gd
+Requires:	php-xml
+Requires:	php-dom
+Requires:	php-openssl
+Requires:	php-sqlite3
+Requires:	php-json
+Requires:	php-posix
+Requires:	php-curl
+Requires:	php-pcntl
+Requires:	php-sockets
+Requires:	rpm-helper
 
-Suggests:	freeimage-devel
-Suggests:	ftjam
-Suggests:	git
-Suggests:	gcc-gfortran
-Suggests:	glew-devel
-Suggests:	gtk+2-devel
-Suggests:	java
-Suggests:	libopenjpeg-devel
-Suggests:	imlib2-devel
-Suggests:	libaio-devel
-Suggests:	libcurl-devel
-Suggests:	libfftw-devel
-Suggests:	libpopt-devel
-Suggests:	libvorbis-devel
-Suggests:	openal-devel
-Suggests:	perl-devel
-#Suggests:	perl-opengl # will be needed in a further revision but we are too close of the release
-Suggests:	portaudio-devel
-Suggests:	png-devel
-Suggests:	php-gd
-Suggests:	scons
-Suggests:	SDL-devel
-Suggests:	SDL_gfx-devel
-Suggests:	SDL_net-devel
-Suggests:	SDL_image-devel
-Suggests:	SDL_sound-devel
-Suggests:	SDL_ttf-devel
-Suggests:	task-c-devel
-Suggests:	task-c++-devel
-Suggests:	tcsh
-Suggests:	X11-devel
+Recommends:	freeimage-devel
+Recommends:	ftjam
+Recommends:	git
+Recommends:	gcc-gfortran
+Recommends:	java
+Recommends:	libaio-devel
+Recommends:	perl-devel
+Recommends:	perl-OpenGL
+Recommends:	pkgconfig(fftw3)
+Recommends:	pkgconfig(glew)
+Recommends:	pkgconfig(gtk+-2.0)
+Recommends:	pkgconfig(imlib2)
+Recommends:	pkgconfig(libcurl)
+Recommends:	pkgconfig(libopenjpeg1)
+Recommends:	pkgconfig(libpng)
+Recommends:	pkgconfig(openal)
+Recommends:	pkgconfig(popt)
+Recommends:	pkgconfig(portaudio-2.0)
+Recommends:	pkgconfig(sdl)
+Recommends:	pkgconfig(SDL_gfx)
+Recommends:	pkgconfig(SDL_net)
+Recommends:	pkgconfig(SDL_image)
+Recommends:	pkgconfig(SDL_ttf)
+Recommends:	pkgconfig(vorbis)
+Recommends:	pkgconfig(x11)
+Recommends:	SDL_sound-devel
+Recommends:	scons
+Recommends:	task-c-devel
+Recommends:	task-c++-devel
+Recommends:	tcsh
 
 %description
-The Phoronix Test Suite is the most comprehensive testing and benchmarking 
-platform available for Linux and is designed to carry out qualitative and 
+The Phoronix Test Suite is the most comprehensive testing and benchmarking
+platform available for Linux and is designed to carry out qualitative and
 quantitative benchmarks in a clean, reproducible, and easy-to-use manner.
 
 %prep
 %setup -q -n %{name}
-%apply_patches
+
+# fix non-executable-script
+chmod +x pts-core/external-test-dependencies/scripts/install-macports-packages.sh
+chmod +x pts-core/static/sample-pts-client-update-script.sh
+chmod -x pts-core/objects/phodevi/sensors/network_usage.php
 
 %build
-echo "fake build"
 
 %install
-%__mkdir_p %{buildroot}%{_prefix}
-./install-sh %{buildroot}%{_prefix}
-%__sed -i "s|%{buildroot}||g" %{buildroot}%{_bindir}/%{name}
+export DESTDIR=%{buildroot}
+./install-sh %{_prefix}
 
-%if %{gui_enabled}
-# we overwrite default desktop file with the better one
-# should be checked if it's needed when GUI is back
-%__cat > %{buildroot}%{_datadir}/applications/%{name}.desktop <<EOF
+mkdir -p %{buildroot}%{_datadir}/applications
+cat > %{buildroot}%{_datadir}/applications/%{name}-gui.desktop <<EOF
 [Desktop Entry]
-Name=Phoronix Test Suite
-Comment=Phoronix Test Suite Benchmarking Utility
+Name=Phoronix Test Suite (GUI)
+GenericName=A GUI for Phoronix Test Suite Benchmarking Utility
+GenericName[fr]=Une interface graphique pour l'utilitaire d'évaluation Phoronix Test Suite
+Comment=Phoronix Test Suite GUI
+Comment[fr]=Interface graphique de Phoronix Test Suite
 Exec=%{_bindir}/%{name} gui
 Icon=%{name}
 Terminal=false
 Type=Application
-Encoding=UTF-8
 StartupNotify=true
-Categories=GTK;System;Monitor;X-MandrivaLinux-CrossDesktop;
+Categories=GTK;System;Monitor;X-Mageia-CrossDesktop;
 EOF
-%endif
+
+%post
+%_post_service phoromatic-client
+%_post_service phoromatic-server
+
+%preun
+%_preun_service phoromatic-client
+%_preun_service phoromatic-server
 
 %files
-%defattr(-,root,root,0755)
 %doc %{_datadir}/doc/%{name}
-%{_sysconfdir}/bash_completion.d/%{name}
-%{_unitdir}/phoromatic-client.service
-%{_unitdir}/phoromatic-server.service
-%{_mandir}/man1/%{name}.1*
+%config(noreplace) %{_sysconfdir}/bash_completion.d/%{name}
+#{_unitdir}/phoromatic-client.service
+#{_unitdir}/phoromatic-server.service
+/usr/lib/systemd/system/phoromatic-client.service
+/usr/lib/systemd/system/phoromatic-server.service
 %{_bindir}/%{name}
-%{_datadir}/%{name}/*
-%{_datadir}/appdata/*.xml
+%{_datadir}/%{name}/
 %{_datadir}/applications/%{name}.desktop
-%{_datadir}/applications/phoronix-test-suite-launcher.desktop
+%{_datadir}/applications/%{name}-gui.desktop
+%{_datadir}/applications/%{name}-launcher.desktop
+%{_datadir}/appdata/%{name}.appdata.xml
+%{_datadir}/mime/packages/*.xml
 %{_iconsdir}/hicolor/48x48/apps/%{name}.png
-%{_iconsdir}/hicolor/64x64/mimetypes/application-x-openbenchmarking.png
-%{_datadir}/mime/packages/openbenchmarking-mime.xml
-
+%{_iconsdir}/hicolor/64x64/mimetypes/*.png
+%{_mandir}/man1/%{name}.1*
