@@ -2,7 +2,7 @@
 
 Summary:	A Comprehensive Linux Benchmarking System
 Name:		phoronix-test-suite
-Version:	8.4.1
+Version:	8.8.1
 Release:	1
 License:	GPLv3
 Group:		Publishing
