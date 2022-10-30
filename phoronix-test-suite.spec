@@ -2,7 +2,7 @@
 
 Summary:	A Comprehensive Linux Benchmarking System
 Name:		phoronix-test-suite
-Version:	9.0.1
+Version:	10.8.4
 Release:	1
 License:	GPLv3
 Group:		Publishing
@@ -15,12 +15,10 @@ Requires:	php-xml
 Requires:	php-dom
 Requires:	php-openssl
 Requires:	php-sqlite3
-Requires:	php-json
 Requires:	php-posix
 Requires:	php-curl
 Requires:	php-pcntl
 Requires:	php-sockets
-Requires:	rpm-helper
 
 Recommends:	freeimage-devel
 Recommends:	ftjam
@@ -59,12 +57,11 @@ platform available for Linux and is designed to carry out qualitative and
 quantitative benchmarks in a clean, reproducible, and easy-to-use manner.
 
 %prep
-%setup -q -n %{name}
+%autosetup -n %{name} -p1
 
 # fix non-executable-script
 chmod +x pts-core/external-test-dependencies/scripts/install-macports-packages.sh
 chmod +x pts-core/static/sample-pts-client-update-script.sh
-chmod -x pts-core/objects/phodevi/sensors/network_usage.php
 
 %build
 
@@ -85,31 +82,32 @@ Icon=%{name}
 Terminal=false
 Type=Application
 StartupNotify=true
-Categories=GTK;System;Monitor;X-Mageia-CrossDesktop;
+Categories=GTK;System;Monitor;
 EOF
 
 %post
-%_post_service phoromatic-client
-%_post_service phoromatic-server
+%systemd_post phoromatic-client.service
+%systemd_post phoromatic-server.service
+%systemd_post phoronix-result-server.service
+
+%postun
+%systemd_postun_with_restart phoromatic-client.service
+%systemd_postun_with_restart phoromatic-server.service
+%systemd_postun_with_restart phoronix-result-server.service
 
 %preun
-%_preun_service phoromatic-client
-%_preun_service phoromatic-server
+%systemd_preun phoromatic-client.service
+%systemd_preun phoromatic-server.service
+%systemd_preun phoronix-result-server.service
 
 %files
 %doc %{_datadir}/doc/%{name}
 %config(noreplace) %{_sysconfdir}/bash_completion.d/%{name}
-#{_unitdir}/phoromatic-client.service
-#{_unitdir}/phoromatic-server.service
-/usr/lib/systemd/system/phoromatic-client.service
-/usr/lib/systemd/system/phoromatic-server.service
+%{_unitdir}/*.service
 %{_bindir}/%{name}
-%{_datadir}/%{name}/
-%{_datadir}/applications/%{name}.desktop
-%{_datadir}/applications/%{name}-gui.desktop
-%{_datadir}/applications/%{name}-launcher.desktop
+%{_datadir}/%{name}
+%{_datadir}/applications/*.desktop
 %{_datadir}/appdata/%{name}.appdata.xml
 %{_datadir}/mime/packages/*.xml
-%{_iconsdir}/hicolor/48x48/apps/%{name}.png
-%{_iconsdir}/hicolor/64x64/mimetypes/*.png
-%{_mandir}/man1/%{name}.1*
+%{_iconsdir}/hicolor/*/*/*.png
+%doc %{_mandir}/man1/%{name}.1*
