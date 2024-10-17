@@ -6,7 +6,7 @@ Version:	10.8.4
 Release:	1
 License:	GPLv3
 Group:		Publishing
-Url:		http://www.phoronix-test-suite.com/
+Url:		https://www.phoronix-test-suite.com/
 Source0:	http://www.phoronix-test-suite.com/releases/%{name}-%{version}.tar.gz
 BuildArch:	noarch
 Requires:	php-cli
